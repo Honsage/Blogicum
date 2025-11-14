@@ -1,8 +1,9 @@
 from django.shortcuts import render
+from django.http import Http404
 
 
-posts = [
-    {
+posts = {
+    0: {
         'id': 0,
         'location': 'Остров отчаянья',
         'date': '30 сентября 1659 года',
@@ -14,7 +15,7 @@ posts = [
                 полумёртвым на берег этого проклятого острова,
                 который назвал островом Отчаяния.''',
     },
-    {
+    1: {
         'id': 1,
         'location': 'Остров отчаянья',
         'date': '1 октября 1659 года',
@@ -30,7 +31,7 @@ posts = [
                 построить баркас, на котором и выбрались бы из этого
                 гиблого места.''',
     },
-    {
+    2: {
         'id': 2,
         'location': 'Остров отчаянья',
         'date': '25 октября 1659 года',
@@ -42,15 +43,17 @@ posts = [
                 Весь этот день я хлопотал  около вещей: укрывал и
                 укутывал их, чтобы не испортились от дождя.''',
     },
-]
+}
 
 
 def index(request):
-    context = {'posts': reversed(posts)}
+    context = {'posts': reversed(posts.values())}
     return render(request, 'blog/index.html', context)
 
 
 def post_detail(request, id):
+    if id not in posts.keys():
+        raise Http404(f"Введен некорректный идентификатор поста: {id}")
     context = {'post': posts[id]}
     return render(request, 'blog/detail.html', context)
 
