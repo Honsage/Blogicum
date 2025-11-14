@@ -46,15 +46,15 @@ posts = [
 
 
 def index(request):
-    context = {}
+    context = {'posts': reversed(posts)}
     return render(request, 'blog/index.html', context)
 
 
 def post_detail(request, id):
-    context = {}
+    context = {'post': posts[id]}
     return render(request, 'blog/detail.html', context)
 
 
 def category_posts(request, category_slug):
-    context = {}
+    context = {'category': category_slug}
     return render(request, 'blog/category.html', context)
