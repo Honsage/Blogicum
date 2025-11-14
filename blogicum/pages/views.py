@@ -1,3 +1,9 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def about(request):
+    return render(request, '', {})
+
+
+def rules(request):
+    return render(request, '', {})
