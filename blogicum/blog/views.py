@@ -1,8 +1,7 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import Http404
 from django.utils import timezone
 from django.db.models import Q
-from .models import Category, Location, Post
+from .models import Category, Post
 
 
 def index(request):
@@ -18,10 +17,10 @@ def index(request):
 def post_detail(request, id):
     post = get_object_or_404(
         Post,
-        Q(pk=id) &
-        Q(pub_date__lte=timezone.now()) &
-        Q(is_published=True) &
-        Q(category__is_published=True)
+        Q(pk=id)
+        & Q(pub_date__lte=timezone.now())
+        & Q(is_published=True)
+        & Q(category__is_published=True)
     )
 
     context = {'post': post}
