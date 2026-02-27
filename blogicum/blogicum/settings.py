@@ -132,3 +132,18 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CSRF_FAILURE_VIEW = "pages.views.csrf_failure"
+
+AUTH_USER_MODEL = "users.User"
+
+LOGIN_REDIRECT_URL = "blog:index"
+
+LOGIN_URL = "users:login"
+
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = BASE_DIR / "sent_emails/"
+
+MEDIA_ROOT = BASE_DIR / "media/"
+
+MEDIA_URL = "/media/"
